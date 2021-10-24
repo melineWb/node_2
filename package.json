@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "nodemon --exec babel-node ./index.mjs",
-        "lint": "npx eslint . --ext .js,.mjs"
+        "lint": "npx eslint . --ext .mjs,.js"
     },
     "repository": {
         "type": "git",
@@ -19,6 +19,7 @@
     "homepage": "https://github.com/melineWb/node_2#readme",
     "devDependencies": {
         "@babel/core": "^7.15.8",
+        "@babel/eslint-parser": "^7.15.8",
         "@babel/node": "^7.15.8",
         "@babel/preset-env": "^7.15.8",
         "babel-eslint": "^10.1.0",
@@ -27,6 +28,8 @@
         "nodemon": "^2.0.13"
     },
     "dependencies": {
-        "express": "^4.17.1"
+        "express": "^4.17.1",
+        "express-joi-validation": "^5.0.0",
+        "joi": "^17.4.2"
     }
 }
