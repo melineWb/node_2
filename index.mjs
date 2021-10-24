@@ -51,12 +51,12 @@ router
         if (req.data?.user) {
             userHelpers.update(req.body, req.data);
             res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully updated`,
+                message: `User with id = ${req.params.user_id} successfully updated`
             });
         } else {
             userHelpers.create(req.body, req.params.user_id);
             res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully created`,
+                message: `User with id = ${req.params.user_id} successfully created`
             });
         }
     })
@@ -64,7 +64,7 @@ router
         if (req.data?.user) {
             userHelpers.update(req.body, req.data);
             res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully updated`,
+                message: `User with id = ${req.params.user_id} successfully updated`
             });
         } else {
             res.json(req.data);
@@ -74,7 +74,7 @@ router
         if (req.data?.user) {
             const user = userHelpers.remove(req.data.user);
             res.status(204).json({
-                message: `User with id = ${user.id} successfully removed`,
+                message: `User with id = ${user.id} successfully removed`
             });
         } else {
             res.json(req.data);
@@ -84,12 +84,12 @@ router
 router.route('/user').post((req, res) => {
     userHelpers.create(req.body);
     res.status(204).json({
-        message: `User with id = ${req.index} successfully created`,
+        message: `User with id = ${req.index} successfully created`
     });
 });
 
 app.use('/', router);
 
-app.get('/', function (req, res) {
+app.get('/', (req, res) => {
     res.send('hello world');
 });

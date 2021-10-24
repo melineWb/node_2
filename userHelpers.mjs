@@ -6,9 +6,8 @@ export function update(newData, data) {
         const updatedUSer = { ...data.user, ...newData };
         users[data.index] = updatedUSer;
         return updatedUSer;
-    } else {
-        return create(newData);
     }
+    return create(newData);
 }
 
 export function create(data, index) {
@@ -35,7 +34,7 @@ export function getAutoSuggestUsers(loginSubstring, limit = 1) {
 create({
     login: 'Hanna',
     password: 'hnsdfkoe123',
-    age: 15,
+    age: 15
 });
 
 export default users;

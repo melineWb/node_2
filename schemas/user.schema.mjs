@@ -3,5 +3,5 @@ const User = {
     login: String,
     password: String,
     age: Number,
-    isDeleted: Boolean,
+    isDeleted: Boolean
 };

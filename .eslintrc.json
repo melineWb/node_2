@@ -1,5 +1,5 @@
 {
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "plugins": [],
     "env": {
         "browser": true,
@@ -26,7 +26,8 @@
             "spread": true,
             "superInFunctions": true,
             "templateStrings": true
-        }
+        },
+        "requireConfigFile": false
     },
     "rules": {
         "no-debugger": 1,
@@ -216,8 +217,7 @@
             4,
             {
                 "ignoreUrls": true,
-                "ignoreComments": false,
-                "ignorePattern": "^\\s*(const|let|var)\\s+\\w+\\s+\\=\\s+\\/.*\\/(|i|g|m|ig|im|gm|igm);?$"
+                "ignoreComments": false
             }
         ],
         "max-nested-callbacks": [
