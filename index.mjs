@@ -1,6 +1,8 @@
 import express from 'express';
 import createError from 'http-errors';
+
 import * as userHelpers from './userHelpers.mjs';
+import validateData from './userValidator.mjs';
 
 const port = process.env.port || '3000';
 const app = express();
@@ -13,7 +15,7 @@ app.listen(port, () => {
 router.param('user_id', (req, res, next, id) => {
     let index;
     const user = userHelpers.default.find((element, i) => {
-        const isCurrent = element.id === +id;
+        const isCurrent = element.id === id;
         if (isCurrent) {
             index = i;
         }
@@ -49,25 +51,27 @@ router
     })
     .put((req, res) => {
         if (req.data?.user) {
-            userHelpers.update(req.body, req.data);
-            res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully updated`
-            });
+            const error = validateData(req.body, true);
+
+            if (error) {
+                res.status(400).json({ errorResponse: error.details });
+            } else {
+                userHelpers.update(req.body, req.data);
+                res.status(204).json({
+                    message: `User with id = ${req.params.user_id} successfully updated`
+                });
+            }
         } else {
-            userHelpers.create(req.body, req.params.user_id);
-            res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully created`
-            });
-        }
-    })
-    .patch((req, res) => {
-        if (req.data?.user) {
-            userHelpers.update(req.body, req.data);
-            res.status(204).json({
-                message: `User with id = ${req.params.user_id} successfully updated`
-            });
-        } else {
-            res.json(req.data);
+            const error = validateData(req.body);
+
+            if (error) {
+                res.status(400).json({ errorResponse: error.details });
+            } else {
+                userHelpers.create(req.body, req.params.user_id);
+                res.status(204).json({
+                    message: `User with id = ${req.params.user_id} successfully created`
+                });
+            }
         }
     })
     .delete((req, res) => {
@@ -82,10 +86,16 @@ router
     });
 
 router.route('/user').post((req, res) => {
-    userHelpers.create(req.body);
-    res.status(204).json({
-        message: `User with id = ${req.index} successfully created`
-    });
+    const error = validateData(req.body);
+
+    if (error) {
+        res.status(400).json({ errorResponse: error.details });
+    } else {
+        userHelpers.create(req.body);
+        res.status(204).json({
+            message: `User with id = ${req.index} successfully created`
+        });
+    }
 });
 
 app.use('/', router);

@@ -11,7 +11,7 @@ export function update(newData, data) {
 }
 
 export function create(data, index) {
-    const newIndex = +index || users.length + 1;
+    const newIndex = index || (users.length + 1).toString();
     const user = new User(newIndex, data);
     users.push(user);
     return user;
