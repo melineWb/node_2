@@ -5,7 +5,7 @@ const userValidationCreateSchema = Joi.object({
     login: Joi.string().alphanum().required().min(3).max(30),
     password: Joi.string().required().pattern(new RegExp('^(?=.*?[A-Za-z])(?=.*?[0-9])')),
     age: Joi.number().required().integer().min(4).max(130),
-    isDeleted: Joi.boolean()
+    is_deleted: Joi.boolean()
 });
 
 const userValidationUpdateSchema = Joi.object({
