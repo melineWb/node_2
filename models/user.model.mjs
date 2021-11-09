@@ -1,0 +1,35 @@
+import DataTypes from 'sequelize';
+import sequelize from '../data-access/user.connection.mjs';
+import config from '../config/properties.config.mjs';
+
+const userModel = sequelize.define(
+    config.table,
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        login: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        age: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+
+        is_deleted: {
+            type: DataTypes.BOOLEAN
+        }
+    },
+    {
+        timestamps: false
+    },
+);
+
+export default userModel;
