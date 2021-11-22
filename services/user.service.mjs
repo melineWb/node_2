@@ -1,36 +1,11 @@
 import pkg from 'sequelize';
 const { Op } = pkg;
 
-class UserSerice {
+import AbstractService from './abstract.service.mjs';
+
+class UserService extends AbstractService {
     constructor(userModel) {
-        this.userModel = userModel;
-    }
-
-    async findAll() {
-        return await this.userModel.findAll();
-    }
-
-    async findById(id) {
-        return await this.userModel.findByPk(id);
-    }
-
-    async update(newData, user) {
-        return await user.update({ ...user, ...newData });
-    }
-
-    async create(data) {
-        return await this.userModel.create(data);
-    }
-
-    async remove(user) {
-        if (user) {
-            return await user.update({
-                ...user,
-                ...{
-                    is_deleted: true
-                }
-            });
-        }
+        super(userModel);
     }
 
     async getAutoSuggestUsers(loginSubstring, limit = 1) {
@@ -47,4 +22,4 @@ class UserSerice {
     }
 }
 
-export default UserSerice;
+export default UserService;

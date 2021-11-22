@@ -4,7 +4,7 @@
     "description": "Home Work 1",
     "main": "index.js",
     "scripts": {
-        "start": "nodemon --exec babel-node ./index.mjs",
+        "start": "nodemon --exec npx babel-node ./index.mjs",
         "lint": "npx eslint . --ext .mjs,.js"
     },
     "repository": {
@@ -23,7 +23,7 @@
         "@babel/node": "^7.15.8",
         "@babel/preset-env": "^7.15.8",
         "babel-eslint": "^10.1.0",
-        "babel-node": "0.0.1-security",
+        "babel-node": "^0.0.1-security",
         "eslint": "^8.0.1",
         "nodemon": "^2.0.13"
     },

@@ -1,9 +1,8 @@
 import DataTypes from 'sequelize';
 import sequelize from '../data-access/user.connection.mjs';
-import config from '../config/properties.config.mjs';
 
 const userModel = sequelize.define(
-    config.table,
+    'users',
     {
         id: {
             type: DataTypes.INTEGER,

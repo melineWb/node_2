@@ -1,12 +1,12 @@
 import express from 'express';
 import createError from 'http-errors';
 
-import UserSerice from '../services/user.service.mjs';
+import UserService from '../services/user.service.mjs';
 import validateData from '../services/user.validator.mjs';
 import userModel from '../models/user.model.mjs';
 
 const router = express.Router();
-const userService = new UserSerice(userModel);
+const userService = new UserService(userModel);
 
 router.param('user_id', async (req, res, next, id) => {
     const data = await userService.findById(id);
