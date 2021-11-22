@@ -7,7 +7,7 @@ pg.defaults.ssl = true;
 const sequelize = new Sequelize(config.url);
 
 sequelize
-    .authenticate()
+    .sync()
     .then(() => {
         console.log('Connection has been established successfully.');
     })

@@ -1,6 +1,7 @@
 import express from 'express';
 import usersRouter from './routers/users.mjs';
 import groupsRouter from './routers/groups.mjs';
+import userGroupRouter from './routers/userGroup.mjs';
 
 const port = process.env.port || '3000';
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/', usersRouter);
 app.use('/', groupsRouter);
+app.use('/', userGroupRouter);
 
 app.get('/', (req, res) => {
     res.send('hello world');

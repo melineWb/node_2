@@ -4,8 +4,6 @@ import createError from 'http-errors';
 import groupModel from '../models/group.model.mjs';
 import GroupService from '../services/group.service.mjs';
 
-console.log(GroupService);
-
 const router = express.Router();
 const groupService = new GroupService(groupModel);
 

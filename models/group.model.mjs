@@ -20,7 +20,6 @@ const groupModel = sequelize.define(
             validate: {
                 permossionsValidator(values) {
                     const isAllowedValues = values.every((val) => {
-                        console.log(val);
                         return config.allowedPropertiesPermissions.includes(val);
                     });
 
