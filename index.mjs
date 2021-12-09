@@ -30,6 +30,7 @@ app.use((error, req, res, next) => {
 });
 
 process.on('uncaughtException', (err) => {
-    logger.error(`[${utilService.getTime()}] UncaughtException: ${err.message}`);
+    const log = `[${utilService.getTime()}] UncaughtException: ${err.message}`;
+    logger.error(log);
     process.exit(1);
 });

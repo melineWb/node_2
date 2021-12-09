@@ -5,21 +5,16 @@ const options = {
     info: {
         level: 'info',
         filename: `${appRoot}/logs/app.log`,
-        handleExceptions: true,
         json: true,
-        maxsize: 5242880, // 5MB
+        maxsize: 5242880,
         maxFiles: 5,
         colorize: false,
-        level: 'debug',
-        handleExceptions: true,
     },
     error: {
         level: 'error',
         filename: `${appRoot}/logs/error.log`,
-        prepend: true,
-        handleExceptions: true,
         json: true,
-        maxsize: 5242880, // 5MB
+        maxsize: 5242880,
         maxFiles: 5,
         colorize: false,
     },
