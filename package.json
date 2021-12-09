@@ -30,6 +30,7 @@
     "dependencies": {
         "express": "^4.17.1",
         "express-joi-validation": "^5.0.0",
+        "fs": "^0.0.1-security",
         "joi": "^17.4.2",
         "pg": "^8.7.1",
         "pg-hstore": "^2.3.4",
