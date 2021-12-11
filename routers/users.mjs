@@ -15,69 +15,93 @@ router.param('user_id', async (req, res, next, id) => {
     next();
 });
 
-router.route('/users/suggest').get(async (req, res) => {
-    let suggestedUsers = [];
-    if (req.query) {
-        suggestedUsers = await userService.getAutoSuggestUsers(req.query.login, req.query.limit);
+router.route('/users/suggest').get(async (req, res, next) => {
+    try {
+        let suggestedUsers = [];
+        if (req.query) {
+            suggestedUsers = await userService.getAutoSuggestUsers(req.query.login, req.query.limit);
+        }
+        res.send(suggestedUsers);
+    } catch (err) {
+        next(err);
     }
-    res.send(suggestedUsers);
 });
 
-router.route('/users').get(async (req, res) => {
-    res.json(await userService.findAll());
+router.route('/users').get(async (req, res, next) => {
+    try {
+        res.json(await userService.findAll());
+    } catch (err) {
+        next(err);
+    }
 });
 
 router
     .route('/user/:user_id')
-    .get((req, res) => {
-        res.json(req.data);
-    })
-    .put(async (req, res) => {
-        if (req.data?.id) {
-            const error = validateData(req.body, true);
-
-            if (error) {
-                res.status(400).json({ errorResponse: error.details });
-            } else {
-                await userService.update(req.body, req.data);
-                res.status(204).json({
-                    message: `User with id = ${req.params.user_id} successfully updated`
-                });
-            }
-        } else {
-            const error = validateData(req.body);
-
-            if (error) {
-                res.status(400).json({ errorResponse: error.details });
-            } else {
-                await userService.create(req.body, req.params.user_id);
-                res.status(204).json({
-                    message: `User with id = ${req.params.user_id} successfully created`
-                });
-            }
+    .get((req, res, next) => {
+        try {
+            res.status(200).json(req.data);
+        } catch (err) {
+            next(err);
         }
     })
-    .delete(async (req, res) => {
-        if (req.data) {
-            const user = await userService.remove(req.data);
-            res.status(204).json({
-                message: `User with id = ${user.id} successfully removed`
-            });
-        } else {
-            res.json(req.data);
+    .put(async (req, res, next) => {
+        try {
+            if (req.data?.id) {
+                const error = validateData(req.body, true);
+
+                if (error) {
+                    res.status(400).json({ errorResponse: error.details });
+                } else {
+                    await userService.update(req.body, req.data);
+                    res.status(204).json({
+                        message: `User with id = ${req.params.user_id} successfully updated`,
+                    });
+                }
+            } else {
+                const error = validateData(req.body);
+
+                if (error) {
+                    res.status(400).json({ errorResponse: error.details });
+                } else {
+                    await userService.create(req.body, req.params.user_id);
+                    res.status(204).json({
+                        message: `User with id = ${req.params.user_id} successfully created`,
+                    });
+                }
+            }
+        } catch (err) {
+            next(err);
+        }
+    })
+    .delete(async (req, res, next) => {
+        try {
+            if (req.data) {
+                const user = await userService.remove(req.data);
+                res.status(204).json({
+                    message: `User with id = ${user.id} successfully removed`,
+                });
+            } else {
+                res.json(req.data);
+            }
+        } catch (err) {
+            next(err);
         }
     });
 
-router.route('/user').post(async (req, res) => {
-    const error = validateData(req.body);
+router.route('/user').post(async (req, res, next) => {
+    try {
+        const error = validateData(req.body);
 
-    if (error) {
-        res.status(400).json({ errorResponse: error.details });
-    } else {
-        await userService.create(req.body);
-        res.status(204).json({
-            message: `User with id = ${req.index} successfully created`
-        });
+        if (error) {
+            res.status(400).json({ errorResponse: error.details });
+        } else {
+            await userService.create(req.body);
+            res.status(204).json({
+                message: `User with id = ${req.index} successfully created`,
+            });
+        }
+    } catch (err) {
+        next(err);
     }
 });
 
