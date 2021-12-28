@@ -1,10 +1,12 @@
 import express from 'express';
+import logger from './config/winston.mjs';
+
 import usersRouter from './routers/users.mjs';
 import groupsRouter from './routers/groups.mjs';
 import userGroupRouter from './routers/userGroup.mjs';
 import logService from './services/logService.mjs';
 import utilService from './services/utilsService.mjs';
-import logger from './config/winston.mjs';
+import middlewareService from './services/middlewareService.mjs';
 
 const port = process.env.port || '3000';
 const app = express();
@@ -17,10 +19,10 @@ app.use(express.json());
 app.use(logService);
 
 app.use('/', usersRouter);
-app.use('/', groupsRouter);
-app.use('/', userGroupRouter);
+app.use('/', middlewareService.authenticateToken, groupsRouter);
+app.use('/', middlewareService.authenticateToken, userGroupRouter);
 
-app.get('/', (req, res) => {
+app.get('/', middlewareService.authenticateToken, (req, res) => {
     res.send('hello world');
 });
 

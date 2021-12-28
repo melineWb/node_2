@@ -9,7 +9,7 @@ router.route('/userGroup').get(async (req, res, next) => {
     try {
         res.json(await userGroupService.findAll());
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 
@@ -18,10 +18,10 @@ router.route('/userGroup/:group_id').post(async (req, res, next) => {
         const userIds = [...req.body.users];
         await userGroupService.addUsersToGroup(req.params.group_id, userIds);
         res.status(204).json({
-            message: `Users (${userIds}) added to group with id ${req.params.group_id}`,
+            message: `Users (${userIds}) added to group with id ${req.params.group_id}`
         });
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 

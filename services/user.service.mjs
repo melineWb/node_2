@@ -20,6 +20,21 @@ class UserService extends AbstractService {
         });
         return users;
     }
+
+    async findByCredentials(login, password) {
+        const data = await this.model.findAll({
+            where: {
+                login,
+                password,
+                is_deleted: {
+                    [Op.not]: true
+                }
+            },
+            limit: 1
+        });
+
+        return data;
+    }
 }
 
 export default UserService;

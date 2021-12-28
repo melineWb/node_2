@@ -18,7 +18,7 @@ router.route('/groups').get(async (req, res, next) => {
     try {
         res.json(await groupService.findAll());
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 
@@ -28,7 +28,7 @@ router
         try {
             res.json(req.data);
         } catch (err) {
-            next(err);
+            return next(err);
         }
     })
     .put(async (req, res, next) => {
@@ -36,16 +36,16 @@ router
             if (req.data?.id) {
                 await groupService.update(req.body, req.data);
                 res.status(204).json({
-                    message: `Group with id = ${req.params.group_id} successfully updated`,
+                    message: `Group with id = ${req.params.group_id} successfully updated`
                 });
             } else {
                 await groupService.create(req.body, req.params.group_id);
                 res.status(204).json({
-                    message: `Group with id = ${req.params.group_id} successfully created`,
+                    message: `Group with id = ${req.params.group_id} successfully created`
                 });
             }
         } catch (err) {
-            next(err);
+            return next(err);
         }
     })
     .delete(async (req, res, next) => {
@@ -53,13 +53,13 @@ router
             if (req.data) {
                 const group = await groupService.remove(req.data);
                 res.status(204).json({
-                    message: `Group with id = ${group.id} successfully removed`,
+                    message: `Group with id = ${group.id} successfully removed`
                 });
             } else {
                 res.json(req.data);
             }
         } catch (err) {
-            next(err);
+            return next(err);
         }
     });
 
@@ -67,10 +67,10 @@ router.route('/group').post(async (req, res, next) => {
     try {
         await groupService.create(req.body);
         res.status(204).json({
-            message: `Group with id = ${req.index} successfully created`,
+            message: `Group with id = ${req.index} successfully created`
         });
     } catch (err) {
-        next(err);
+        return next(err);
     }
 });
 
