@@ -1,5 +1,6 @@
 import express from 'express';
 import logger from './config/winston.mjs';
+import cors from 'cors';
 
 import usersRouter from './routers/users.mjs';
 import groupsRouter from './routers/groups.mjs';
@@ -12,11 +13,12 @@ const port = process.env.port || '3000';
 const app = express();
 
 app.listen(port, () => {
-    console.log(`Node Express server listening on http://localhost:${port}`);
+    console.log(`CORS-enabled web server listening on port http://localhost:${port}`);
 });
 
 app.use(express.json());
 app.use(logService);
+app.use(cors());
 
 app.use('/', usersRouter);
 app.use('/', middlewareService.authenticateToken, groupsRouter);
