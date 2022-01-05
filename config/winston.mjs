@@ -8,7 +8,7 @@ const options = {
         json: true,
         maxsize: 5242880,
         maxFiles: 5,
-        colorize: false,
+        colorize: false
     },
     error: {
         level: 'error',
@@ -16,13 +16,13 @@ const options = {
         json: true,
         maxsize: 5242880,
         maxFiles: 5,
-        colorize: false,
-    },
+        colorize: false
+    }
 };
 
-var logger = winston.createLogger({
+const logger = winston.createLogger({
     transports: [new winston.transports.File(options.error), new winston.transports.File(options.info)],
-    exitOnError: false,
+    exitOnError: false
 });
 
 export default logger;

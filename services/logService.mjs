@@ -6,11 +6,11 @@ const createLogStr = (method, reqUrl, params, statusCode) => {
     return `[${utilService.getTime()}] ${method}:${reqUrl} ${params} ${statusCode} ${duration}`;
 };
 
-let logService = (req, res, next) => {
+const logService = (req, res, next) => {
     const body = `Body: ${JSON.stringify(req.body)}`;
     const params = `Params: ${JSON.stringify(req.params)}`;
 
-    res.on('finish', function () {
+    res.on('finish', () => {
         const log = createLogStr(req.method, req.url, `${body} ${params}`, res.statusCode);
         if (/^20/.test(res.statusCode)) {
             logger.info(log);

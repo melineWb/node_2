@@ -7,7 +7,7 @@ class UtilService {
             hour: '2-digit',
             hour12: false,
             minute: '2-digit',
-            second: '2-digit',
+            second: '2-digit'
         });
     }
 
@@ -19,17 +19,17 @@ class UtilService {
     }
 }
 
-const SingletonFactory = (function () {
+const SingletonFactory = (function createInst() {
     let instance;
 
     return {
-        getInstance: function () {
+        getInstance() {
             if (!instance) {
                 instance = new UtilService();
             }
             return instance;
-        },
+        }
     };
-})();
+}());
 
 export default SingletonFactory.getInstance();
