@@ -1,14 +1,16 @@
 import express from 'express';
 import logger from './config/winston.mjs';
 import cors from 'cors';
+import dotenv from 'dotenv';
 
-import usersRouter from './routers/users.mjs';
+import usersRouter from './routers/users/users.mjs';
 import groupsRouter from './routers/groups.mjs';
 import userGroupRouter from './routers/userGroup.mjs';
 import logService from './services/logService.mjs';
 import utilService from './services/utilsService.mjs';
 import middlewareService from './services/middlewareService.mjs';
 
+dotenv.config();
 const port = process.env.port || '3000';
 const app = express();
 

@@ -1,7 +1,7 @@
 import pkg from 'sequelize';
 const { Op } = pkg;
 
-import AbstractService from './abstract.service.mjs';
+import AbstractService from '../abstract.service.mjs';
 
 class UserService extends AbstractService {
     constructor(userModel) {

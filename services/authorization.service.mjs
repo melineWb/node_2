@@ -6,7 +6,7 @@ import config from '../config/properties.config.mjs';
 class AuthorizationService {
     constructor() {
         dotenv.config();
-        this.secret = process.env.TOKEN_SECRET || config.secret;
+        this.secret = process.env.TOKEN_SECRET;
     }
 
     login(username, password) {

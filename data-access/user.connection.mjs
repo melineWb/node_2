@@ -1,10 +1,11 @@
 import Sequelize from 'sequelize';
 import pg from 'pg';
-import config from '../config/properties.config.mjs';
+import dotenv from 'dotenv';
 
+dotenv.config();
 pg.defaults.ssl = true;
 
-const sequelize = new Sequelize(config.url);
+const sequelize = new Sequelize(process.env.DB_URL);
 
 sequelize
     .sync()

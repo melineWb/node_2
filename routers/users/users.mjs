@@ -1,11 +1,11 @@
 import express from 'express';
 import createError from 'http-errors';
 
-import UserService from '../services/user.service.mjs';
-import validateData from '../services/user.validator.mjs';
-import userModel from '../models/user.model.mjs';
-import middlewareService from '../services/middlewareService.mjs';
-import authorizationService from '../services/authorization.service.mjs';
+import UserService from '../../services/user/user.service.mjs';
+import validateData from '../../services/user.validator.mjs';
+import userModel from '../../models/user.model.mjs';
+import middlewareService from '../../services/middlewareService.mjs';
+import authorizationService from '../../services/authorization.service.mjs';
 
 const router = express.Router();
 const userService = new UserService(userModel);
@@ -69,6 +69,7 @@ router
     .put(middlewareService.authenticateToken, async (req, res, next) => {
         try {
             if (req.data?.id) {
+                console.log('VALIDATE 3');
                 const error = validateData(req.body, true);
 
                 if (error) {
@@ -80,6 +81,7 @@ router
                     });
                 }
             } else {
+                console.log('VALIDATE 2');
                 const error = validateData(req.body);
 
                 if (error) {
@@ -110,6 +112,7 @@ router
 
 router.route('/user').post(middlewareService.authenticateToken, async (req, res, next) => {
     try {
+        console.log('VALIDATE 1');
         const error = validateData(req.body);
 
         if (error) {

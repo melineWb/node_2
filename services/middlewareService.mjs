@@ -3,7 +3,7 @@ import authorizationService from './authorization.service.mjs';
 class MiddlewareService {
     authenticateToken(req, res, next) {
         const token = req.headers['x-access-token'];
-        if (token === null) return res.sendStatus(401);
+        if (!token) return res.sendStatus(401);
 
         const data = authorizationService.verify(token);
 
