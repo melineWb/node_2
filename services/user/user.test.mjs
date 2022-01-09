@@ -13,7 +13,7 @@ describe('UserService', () => {
             login: 'testUser',
             password: 'qwer1234',
             age: 27,
-            is_deleted: false
+            is_deleted: false,
         };
 
         users = [user1];
@@ -23,7 +23,7 @@ describe('UserService', () => {
             findByPk: jest.fn().mockImplementation((id) => users.find((el) => el.id === id)),
             update: jest.fn(),
             create: jest.fn(),
-            remove: jest.fn()
+            remove: jest.fn(),
         };
 
         userServiceData = new UserService(mockUserModel);
@@ -62,7 +62,7 @@ describe('UserService', () => {
 
                     return el;
                 });
-            }
+            },
         };
 
         it('should add flag is_deleted to user with ID = 1', async () => {

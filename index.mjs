@@ -3,7 +3,7 @@ import logger from './config/winston.mjs';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
-import usersRouter from './routers/users/users.mjs';
+import usersRouter from './routers/users.mjs';
 import groupsRouter from './routers/groups.mjs';
 import userGroupRouter from './routers/userGroup.mjs';
 import logService from './services/logService.mjs';
