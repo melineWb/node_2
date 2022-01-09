@@ -1,5 +1,5 @@
-import utilService from './utilsService.mjs';
-import logger from '../config/winston.mjs';
+const utilService = require('./utilsService.js');
+const logger = require('../config/winston.js');
 
 const createLogStr = (method, reqUrl, params, statusCode) => {
     const duration = utilService.getActualRequestDurationInMilliseconds();
@@ -22,4 +22,4 @@ const logService = (req, res, next) => {
     next();
 };
 
-export default logService;
+module.exports = logService;

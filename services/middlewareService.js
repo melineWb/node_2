@@ -1,4 +1,4 @@
-import authorizationService from './authorization.service.mjs';
+const authorizationService = require('./authorization.service.js');
 
 class MiddlewareService {
     authenticateToken(req, res, next) {
@@ -28,4 +28,4 @@ const SingletonFactory = (function createInst() {
     };
 }());
 
-export default SingletonFactory.getInstance();
+module.exports = SingletonFactory.getInstance();

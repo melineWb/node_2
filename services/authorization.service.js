@@ -1,7 +1,7 @@
-import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
+const dotenv = require('dotenv');
+const jwt = require('jsonwebtoken');
 
-import config from '../config/properties.config.mjs';
+const config = require('../config/properties.config.js');
 
 class AuthorizationService {
     constructor() {
@@ -48,4 +48,4 @@ const SingletonFactory = (function createInst() {
     };
 }());
 
-export default SingletonFactory.getInstance();
+module.exports = SingletonFactory.getInstance();

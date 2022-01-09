@@ -1,4 +1,4 @@
-import AbstractService from './abstract.service.mjs';
+const AbstractService = require('./abstract.service');
 
 class GroupService extends AbstractService {
     constructor(groupModel) {
@@ -12,4 +12,4 @@ class GroupService extends AbstractService {
     }
 }
 
-export default GroupService;
+module.exports = GroupService;

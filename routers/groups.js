@@ -1,8 +1,8 @@
-import express from 'express';
-import createError from 'http-errors';
+const express = require('express');
+const createError = require('http-errors');
 
-import groupModel from '../models/group.model.mjs';
-import GroupService from '../services/group.service.mjs';
+const groupModel = require('../models/group.model.js');
+const GroupService = require('../services/group.service.js');
 
 const router = express.Router();
 const groupService = new GroupService(groupModel);
@@ -74,4 +74,4 @@ router.route('/group').post(async (req, res, next) => {
     }
 });
 
-export default router;
+module.exports = router;

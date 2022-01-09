@@ -32,4 +32,4 @@ const SingletonFactory = (function createInst() {
     };
 }());
 
-export default SingletonFactory.getInstance();
+module.exports = SingletonFactory.getInstance();

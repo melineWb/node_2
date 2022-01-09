@@ -1,5 +1,5 @@
-import DataTypes from 'sequelize';
-import sequelize from '../data-access/user.connection.mjs';
+const DataTypes = require('sequelize');
+const sequelize = require('../data-access/user.connection.js');
 
 console.log('sequelize !!!!!');
 const userModel = sequelize.define(
@@ -8,28 +8,28 @@ const userModel = sequelize.define(
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            autoIncrement: true,
+            autoIncrement: true
         },
         login: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         password: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false
         },
         age: {
             type: DataTypes.INTEGER,
-            allowNull: false,
+            allowNull: false
         },
 
         is_deleted: {
-            type: DataTypes.BOOLEAN,
-        },
+            type: DataTypes.BOOLEAN
+        }
     },
     {
-        timestamps: false,
+        timestamps: false
     },
 );
 
-export default userModel;
+module.exports = userModel;

@@ -3,4 +3,4 @@ const config = {
     expiresIn: '1800s'
 };
 
-export default config;
+module.exports = config;

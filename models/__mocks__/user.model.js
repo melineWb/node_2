@@ -1,4 +1,4 @@
-import SequelizeMock from 'sequelize-mock';
+const SequelizeMock = require('sequelize-mock');
 const DBConnectionMock = new SequelizeMock();
 
 console.log('sequelize 2 !!!!!');
@@ -7,15 +7,15 @@ const userModel = DBConnectionMock.define(
     {
         email: 'email@example.com',
         username: 'blink',
-        picture: 'user-picture.jpg',
+        picture: 'user-picture.jpg'
     },
     {
         instanceMethods: {
-            myTestFunc: function () {
+            myTestFunc() {
                 return 'Test User';
-            },
-        },
+            }
+        }
     },
 );
 
-export default userModel;
+module.exports = userModel;

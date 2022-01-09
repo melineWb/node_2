@@ -1,11 +1,11 @@
-import createError from 'http-errors';
+const createError = require('http-errors');
 
-import userService from '../../services/user/user.service.instance.mjs';
-import validateData from '../../services/user.validator.mjs';
-import authorizationService from '../../services/authorization.service.mjs';
+const userService = require('../../services/user/user.service.instance.js');
+const validateData = require('../../services/user.validator.js');
+const authorizationService = require('../../services/authorization.service.js');
 
 const userController = {
-    getUserById: async function (req, res, next, id) {
+    async getUserById(req, res, next, id) {
         if (!id) {
             createError(404);
         }
@@ -15,7 +15,7 @@ const userController = {
         next();
     },
 
-    login: async function (req, res, next) {
+    async login(req, res, next) {
         try {
             const { username, password } = req.body;
             const user = await userService.findByCredentials(username, password);
@@ -23,7 +23,7 @@ const userController = {
             if (user.length) {
                 const token = authorizationService.login({
                     username,
-                    password,
+                    password
                 });
 
                 res.json(token);
@@ -35,7 +35,7 @@ const userController = {
         }
     },
 
-    getSuggest: async function (req, res, next) {
+    async getSuggest(req, res, next) {
         try {
             let suggestedUsers = [];
             if (req.query) {
@@ -47,7 +47,7 @@ const userController = {
         }
     },
 
-    getUsers: async function (req, res, next) {
+    async getUsers(req, res, next) {
         try {
             res.json(await userService.findAll());
         } catch (err) {
@@ -55,7 +55,7 @@ const userController = {
         }
     },
 
-    getUser: function (req, res, next) {
+    getUser(req, res, next) {
         try {
             res.status(200).json(req.data);
         } catch (err) {
@@ -63,7 +63,7 @@ const userController = {
         }
     },
 
-    putUser: async function (req, res, next) {
+    async putUser(req, res, next) {
         try {
             if (req.data?.id) {
                 const error = validateData(req.body, true);
@@ -73,7 +73,7 @@ const userController = {
                 } else {
                     await userService.update(req.body, req.data);
                     res.status(204).json({
-                        message: `User with id = ${req.params.user_id} successfully updated`,
+                        message: `User with id = ${req.params.user_id} successfully updated`
                     });
                 }
             } else {
@@ -84,7 +84,7 @@ const userController = {
                 }
                 await userService.create(req.body, req.params.user_id);
                 res.status(204).json({
-                    message: `User with id = ${req.params.user_id} successfully created`,
+                    message: `User with id = ${req.params.user_id} successfully created`
                 });
             }
         } catch (err) {
@@ -92,12 +92,12 @@ const userController = {
         }
     },
 
-    deleteUser: async function (req, res, next) {
+    async deleteUser(req, res, next) {
         try {
             if (req.data) {
                 const user = await userService.remove(req.data);
                 res.status(204).json({
-                    message: `User with id = ${user.id} successfully removed`,
+                    message: `User with id = ${user.id} successfully removed`
                 });
             }
             res.json(req.data);
@@ -106,7 +106,7 @@ const userController = {
         }
     },
 
-    postUser: async function (req, res, next) {
+    async postUser(req, res, next) {
         try {
             const error = validateData(req.body);
 
@@ -115,12 +115,12 @@ const userController = {
             }
             await userService.create(req.body);
             res.status(204).json({
-                message: `User with id = ${req.index} successfully created`,
+                message: `User with id = ${req.index} successfully created`
             });
         } catch (err) {
             return next(err);
         }
-    },
+    }
 };
 
-export default userController;
+module.exports = userController;

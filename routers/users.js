@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 
-import middlewareService from '../services/middlewareService.mjs';
-import userController from '../controllers/users/user.controller.mjs';
+const middlewareService = require('../services/middlewareService.js');
+const userController = require('../controllers/users/user.controller.js');
 
 const router = express.Router();
 
@@ -21,4 +21,4 @@ router
 
 router.route('/user').post(middlewareService.authenticateToken, userController.postUser);
 
-export default router;
+module.exports = router;

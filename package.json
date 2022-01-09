@@ -6,17 +6,16 @@
     "jest": {
         "verbose": true,
         "moduleFileExtensions": [
-            "mjs",
             "js"
         ],
         "testMatch": [
-            "**/?(*.)test.mjs"
+            "**/?(*.)test.js"
         ],
         "transform": {}
     },
     "scripts": {
-        "start": "npx nodemon --exec npx babel-node ./index.mjs",
-        "lint": "npx eslint . --ext .mjs,.js",
+        "start": "npx nodemon --exec npx ./index.js",
+        "lint": "npx eslint . --ext .js",
         "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --detectOpenHandles",
         "coverage": "jest --collect-coverage"
     },

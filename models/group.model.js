@@ -1,6 +1,6 @@
-import DataTypes from 'sequelize';
-import sequelize from '../data-access/user.connection.mjs';
-import config from '../config/properties.config.mjs';
+const DataTypes = require('sequelize');
+const sequelize = require('../data-access/user.connection.js');
+const config = require('../config/properties.config.js');
 
 const groupModel = sequelize.define(
     'groups',
@@ -35,4 +35,4 @@ const groupModel = sequelize.define(
     },
 );
 
-export default groupModel;
+module.exports = groupModel;

@@ -1,4 +1,4 @@
-import Joi from 'joi';
+const Joi = require('joi');
 
 const userValidationCreateSchema = Joi.object({
     id: Joi.string(),
@@ -23,4 +23,4 @@ function validateData(data, isUpdate) {
     return error;
 }
 
-export default validateData;
+module.exports = validateData;

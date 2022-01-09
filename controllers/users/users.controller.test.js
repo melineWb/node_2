@@ -1,12 +1,15 @@
-import { jest } from '@jest/globals';
+// import { jest } from '@jest/globals';
 
-jest.mock('../../models/user.model.mjs');
-jest.mock('../../services/user/user.service.instance.mjs', () => jest.fn());
+jest.mock('../../services/user/user.service.instance.js', () => jest.fn());
 
-import userController from './user.controller.mjs';
-import userService from '../../services/user/user.service.instance.mjs';
+jest.mock('../../models/user.model.js', () => ({
+    define: jest.fn().mockImplementation(() => false)
+}));
 
-// jest.mock('../../data-access/user.connection.mjs', () => {
+const userController = require('./user.controller.js');
+const userService = require('../../services/user/user.service.instance.js');
+
+// jest.mock('../../data-access/user.connection.js', () => {
 //     const mSequelize = {
 //         authenticate: jest.fn(),
 //         define: jest.fn(),
@@ -17,7 +20,7 @@ import userService from '../../services/user/user.service.instance.mjs';
 
 const validToken = {
     name: 'x-access-token',
-    value: 'valid',
+    value: 'valid'
 };
 
 // const DBConnectionMock = new SequelizeMock();
@@ -28,19 +31,20 @@ const validToken = {
 //     password: 'test',
 // });
 
-xdescribe('userController', () => {
+describe('userController', () => {
     let mockReq;
     let mockRes;
     const next = jest.fn();
 
     beforeAll(() => {
         mockReq = {
-            body: {},
+            body: {}
         };
         mockRes = {};
     });
 
     beforeEach(() => {
+        jest.resetModules();
         jest.useFakeTimers();
     });
 

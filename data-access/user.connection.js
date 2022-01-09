@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
-import pg from 'pg';
-import dotenv from 'dotenv';
+const Sequelize = require('sequelize');
+const pg = require('pg');
+const dotenv = require('dotenv');
 
 dotenv.config();
 pg.defaults.ssl = true;
@@ -16,4 +16,4 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-export default sequelize;
+module.exports = sequelize;
