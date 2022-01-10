@@ -1,8 +1,9 @@
 const AbstractService = require('./abstract.service');
+const groupModel = require('../models/group.model');
 
 class GroupService extends AbstractService {
-    constructor(groupModel) {
-        super(groupModel);
+    constructor(model) {
+        super(model);
     }
 
     async remove(data) {
@@ -12,4 +13,6 @@ class GroupService extends AbstractService {
     }
 }
 
-module.exports = GroupService;
+const userService = new GroupService(groupModel);
+
+module.exports = userService;

@@ -5,19 +5,19 @@ const AbstractService = require('./abstract.service');
 const userModel = require('../models/user.model');
 
 class UserService extends AbstractService {
-    constructor(userModel) {
-        super(userModel);
+    constructor(model) {
+        super(model);
     }
 
     async getAutoSuggestUsers(loginSubstring, limit = 1) {
         const users = await this.userModel.findAll({
             where: {
                 login: {
-                    [Op.iLike]: `%${loginSubstring}%`,
-                },
+                    [Op.iLike]: `%${loginSubstring}%`
+                }
             },
             order: [['login', 'ASC']],
-            limit,
+            limit
         });
         return users;
     }
@@ -28,10 +28,10 @@ class UserService extends AbstractService {
                 login,
                 password,
                 is_deleted: {
-                    [Op.not]: true,
-                },
+                    [Op.not]: true
+                }
             },
-            limit: 1,
+            limit: 1
         });
 
         return data;

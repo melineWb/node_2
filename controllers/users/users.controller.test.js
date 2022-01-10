@@ -14,7 +14,7 @@ const validateData = require('../../services/user.validator.js');
 
 describe('userController', () => {
     const { res } = getMockRes();
-    let req = getMockReq();
+    const req = getMockReq();
     const next = jest.fn();
     let users;
     let user1;
@@ -26,7 +26,6 @@ describe('userController', () => {
 
     beforeEach(() => {
         jest.resetModules();
-        jest.useFakeTimers();
     });
 
     afterAll(() => {
@@ -34,12 +33,6 @@ describe('userController', () => {
     });
 
     it('should call userService with id from params on getUserById', async () => {
-        const mockReqWithParam = getMockReq({
-            params: {
-                id: '1',
-            },
-        });
-
         await userController.getUserById(req, res, next, 1);
         expect(userService.findById).toBeCalledWith(1);
     });
@@ -49,8 +42,8 @@ describe('userController', () => {
             const mockReqWithBody = getMockReq({
                 body: {
                     username: 'test',
-                    password: 'test',
-                },
+                    password: 'test'
+                }
             });
 
             jest.spyOn(userService, 'findByCredentials').mockReturnValueOnce(users);
@@ -73,8 +66,8 @@ describe('userController', () => {
             const mockReqWithBody = getMockReq({
                 query: {
                     login: 'test',
-                    limit: '3',
-                },
+                    limit: '3'
+                }
             });
 
             jest.spyOn(userService, 'getAutoSuggestUsers').mockReturnValueOnce(users);
@@ -113,27 +106,27 @@ describe('userController', () => {
 
     describe('putUser', () => {
         const reqBody = {
-            login: 'updatedLogin',
+            login: 'updatedLogin'
         };
 
         const reqData = {
-            id: '1',
+            id: '1'
         };
 
         const mockedReq = getMockReq({
             params: {
-                user_id: '1',
+                user_id: '1'
             },
             data: reqData,
-            body: reqBody,
+            body: reqBody
         });
 
         const mockedReqToCreate = getMockReq({
             params: {
-                user_id: '2',
+                user_id: '2'
             },
             data: {},
-            body: reqBody,
+            body: reqBody
         });
 
         it('should update existed user', async () => {
@@ -145,7 +138,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(204);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    message: 'User with id = 1 successfully updated',
+                    message: 'User with id = 1 successfully updated'
                 }),
             );
         });
@@ -158,7 +151,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(400);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    errorResponse: 'Error',
+                    errorResponse: 'Error'
                 }),
             );
         });
@@ -171,7 +164,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(400);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    errorResponse: 'Error',
+                    errorResponse: 'Error'
                 }),
             );
         });
@@ -184,7 +177,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(204);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    message: 'User with id = 2 successfully created',
+                    message: 'User with id = 2 successfully created'
                 }),
             );
         });
@@ -193,8 +186,8 @@ describe('userController', () => {
     it('should return 204 status on success deleteUser', async () => {
         const mockReq = getMockReq({
             data: {
-                id: '1',
-            },
+                id: '1'
+            }
         });
 
         jest.spyOn(userService, 'remove').mockReturnValueOnce(user1);
@@ -204,23 +197,23 @@ describe('userController', () => {
         expect(res.status).toBeCalledWith(204);
         expect(res.json).toHaveBeenCalledWith(
             expect.objectContaining({
-                message: 'User with id = 1 successfully removed',
+                message: 'User with id = 1 successfully removed'
             }),
         );
     });
 
     describe('postUser', () => {
         const reqBody = {
-            login: 'updatedLogin',
+            login: 'updatedLogin'
         };
 
         const reqData = {
-            id: '1',
+            id: '1'
         };
 
         const mockedReq = getMockReq({
             data: reqData,
-            body: reqBody,
+            body: reqBody
         });
 
         it('should create user', async () => {
@@ -232,7 +225,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(204);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    message: 'User with id = 1 successfully created',
+                    message: 'User with id = 1 successfully created'
                 }),
             );
         });
@@ -245,7 +238,7 @@ describe('userController', () => {
             expect(res.status).toBeCalledWith(400);
             expect(res.json).toHaveBeenCalledWith(
                 expect.objectContaining({
-                    errorResponse: 'Error',
+                    errorResponse: 'Error'
                 }),
             );
         });

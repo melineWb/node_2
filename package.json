@@ -30,6 +30,7 @@
     },
     "homepage": "https://github.com/melineWb/node_2#readme",
     "devDependencies": {
+        "@babel/eslint-parser": "^7.16.5",
         "@jest-mock/express": "^1.4.5",
         "cross-env": "^7.0.3",
         "eslint": "^8.0.1",

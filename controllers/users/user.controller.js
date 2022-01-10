@@ -23,7 +23,7 @@ const userController = {
             if (user.length) {
                 const token = authorizationService.login({
                     username,
-                    password,
+                    password
                 });
 
                 res.json(token);
@@ -73,7 +73,7 @@ const userController = {
                 } else {
                     await userService.update(req.body, req.data);
                     res.status(204).json({
-                        message: `User with id = ${req.params.user_id} successfully updated`,
+                        message: `User with id = ${req.params.user_id} successfully updated`
                     });
                 }
             } else {
@@ -84,7 +84,7 @@ const userController = {
                 }
                 await userService.create(req.body, req.params.user_id);
                 res.status(204).json({
-                    message: `User with id = ${req.params.user_id} successfully created`,
+                    message: `User with id = ${req.params.user_id} successfully created`
                 });
             }
         } catch (err) {
@@ -97,7 +97,7 @@ const userController = {
             if (req.data) {
                 const user = await userService.remove(req.data);
                 res.status(204).json({
-                    message: `User with id = ${user.id} successfully removed`,
+                    message: `User with id = ${user.id} successfully removed`
                 });
             }
         } catch (err) {
@@ -114,12 +114,12 @@ const userController = {
             }
             const user = await userService.create(req.body);
             res.status(204).json({
-                message: `User with id = ${user.id} successfully created`,
+                message: `User with id = ${user.id} successfully created`
             });
         } catch (err) {
             return next(err);
         }
-    },
+    }
 };
 
 module.exports = userController;
