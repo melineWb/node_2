@@ -1,21 +1,6 @@
 const SequelizeMock = require('sequelize-mock');
 const DBConnectionMock = new SequelizeMock();
+const mockData = require('../../__mocks__/data');
 
-console.log('sequelize 2 !!!!!');
-const userModel = DBConnectionMock.define(
-    'users',
-    {
-        email: 'email@example.com',
-        username: 'blink',
-        picture: 'user-picture.jpg'
-    },
-    {
-        instanceMethods: {
-            myTestFunc() {
-                return 'Test User';
-            }
-        }
-    },
-);
-
+const userModel = DBConnectionMock.define('users', mockData.users);
 module.exports = userModel;

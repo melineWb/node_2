@@ -1,6 +1,6 @@
 const createError = require('http-errors');
 
-const userService = require('../../services/user/user.service.instance.js');
+const userService = require('../../services/user.service.js');
 const validateData = require('../../services/user.validator.js');
 const authorizationService = require('../../services/authorization.service.js');
 
@@ -23,7 +23,7 @@ const userController = {
             if (user.length) {
                 const token = authorizationService.login({
                     username,
-                    password
+                    password,
                 });
 
                 res.json(token);
@@ -38,7 +38,7 @@ const userController = {
     async getSuggest(req, res, next) {
         try {
             let suggestedUsers = [];
-            if (req.query) {
+            if (req.query && Object.keys(req.query).length !== 0) {
                 suggestedUsers = await userService.getAutoSuggestUsers(req.query.login, req.query.limit);
             }
             res.send(suggestedUsers);
@@ -73,7 +73,7 @@ const userController = {
                 } else {
                     await userService.update(req.body, req.data);
                     res.status(204).json({
-                        message: `User with id = ${req.params.user_id} successfully updated`
+                        message: `User with id = ${req.params.user_id} successfully updated`,
                     });
                 }
             } else {
@@ -84,7 +84,7 @@ const userController = {
                 }
                 await userService.create(req.body, req.params.user_id);
                 res.status(204).json({
-                    message: `User with id = ${req.params.user_id} successfully created`
+                    message: `User with id = ${req.params.user_id} successfully created`,
                 });
             }
         } catch (err) {
@@ -97,10 +97,9 @@ const userController = {
             if (req.data) {
                 const user = await userService.remove(req.data);
                 res.status(204).json({
-                    message: `User with id = ${user.id} successfully removed`
+                    message: `User with id = ${user.id} successfully removed`,
                 });
             }
-            res.json(req.data);
         } catch (err) {
             return next(err);
         }
@@ -113,14 +112,14 @@ const userController = {
             if (error) {
                 res.status(400).json({ errorResponse: error.details });
             }
-            await userService.create(req.body);
+            const user = await userService.create(req.body);
             res.status(204).json({
-                message: `User with id = ${req.index} successfully created`
+                message: `User with id = ${user.id} successfully created`,
             });
         } catch (err) {
             return next(err);
         }
-    }
+    },
 };
 
 module.exports = userController;

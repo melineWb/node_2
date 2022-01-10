@@ -1,7 +1,8 @@
 const pkg = require('sequelize');
 const { Op } = pkg;
 
-const AbstractService = require('../abstract.service');
+const AbstractService = require('./abstract.service');
+const userModel = require('../models/user.model');
 
 class UserService extends AbstractService {
     constructor(userModel) {
@@ -12,11 +13,11 @@ class UserService extends AbstractService {
         const users = await this.userModel.findAll({
             where: {
                 login: {
-                    [Op.iLike]: `%${loginSubstring}%`
-                }
+                    [Op.iLike]: `%${loginSubstring}%`,
+                },
             },
             order: [['login', 'ASC']],
-            limit
+            limit,
         });
         return users;
     }
@@ -27,14 +28,16 @@ class UserService extends AbstractService {
                 login,
                 password,
                 is_deleted: {
-                    [Op.not]: true
-                }
+                    [Op.not]: true,
+                },
             },
-            limit: 1
+            limit: 1,
         });
 
         return data;
     }
 }
 
-module.exports = UserService;
+const userService = new UserService(userModel);
+
+module.exports = userService;
