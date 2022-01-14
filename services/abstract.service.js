@@ -31,4 +31,4 @@ class AbstractService {
     }
 }
 
-export default AbstractService;
+module.exports = AbstractService;

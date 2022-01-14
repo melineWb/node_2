@@ -1,5 +1,5 @@
-import appRoot from 'app-root-path';
-import winston from 'winston';
+const appRoot = require('app-root-path');
+const winston = require('winston');
 
 const options = {
     info: {
@@ -25,4 +25,4 @@ const logger = winston.createLogger({
     exitOnError: false
 });
 
-export default logger;
+module.exports = logger;

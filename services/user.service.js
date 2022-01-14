@@ -1,11 +1,12 @@
-import pkg from 'sequelize';
+const pkg = require('sequelize');
 const { Op } = pkg;
 
-import AbstractService from './abstract.service.mjs';
+const AbstractService = require('./abstract.service');
+const userModel = require('../models/user.model');
 
 class UserService extends AbstractService {
-    constructor(userModel) {
-        super(userModel);
+    constructor(model) {
+        super(model);
     }
 
     async getAutoSuggestUsers(loginSubstring, limit = 1) {
@@ -37,4 +38,6 @@ class UserService extends AbstractService {
     }
 }
 
-export default UserService;
+const userService = new UserService(userModel);
+
+module.exports = userService;

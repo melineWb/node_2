@@ -3,9 +3,21 @@
     "version": "1.0.0",
     "description": "Home Work 1",
     "main": "index.js",
+    "jest": {
+        "verbose": true,
+        "moduleFileExtensions": [
+            "js"
+        ],
+        "testMatch": [
+            "**/?(*.)test.js"
+        ],
+        "transform": {}
+    },
     "scripts": {
-        "start": "npx nodemon --exec npx babel-node ./index.mjs",
-        "lint": "npx eslint . --ext .mjs,.js"
+        "start": "npx nodemon --exec npx ./index.js",
+        "lint": "npx eslint . --ext .js",
+        "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest --detectOpenHandles",
+        "coverage": "jest --collect-coverage"
     },
     "repository": {
         "type": "git",
@@ -18,14 +30,13 @@
     },
     "homepage": "https://github.com/melineWb/node_2#readme",
     "devDependencies": {
-        "@babel/core": "^7.15.8",
-        "@babel/eslint-parser": "^7.15.8",
-        "@babel/node": "^7.15.8",
-        "@babel/preset-env": "^7.15.8",
-        "babel-eslint": "^10.1.0",
-        "babel-node": "^0.0.1-security",
+        "@babel/eslint-parser": "^7.16.5",
+        "@jest-mock/express": "^1.4.5",
+        "cross-env": "^7.0.3",
         "eslint": "^8.0.1",
-        "nodemon": "^2.0.13"
+        "jest": "^27.4.5",
+        "nodemon": "^2.0.13",
+        "sequelize-mock": "^0.10.2"
     },
     "dependencies": {
         "app-root-path": "^3.0.0",

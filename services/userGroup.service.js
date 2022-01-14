@@ -14,4 +14,4 @@ class UserGroupService {
     }
 }
 
-export default UserGroupService;
+module.exports = UserGroupService;

@@ -1,14 +1,16 @@
-import express from 'express';
-import logger from './config/winston.mjs';
-import cors from 'cors';
+const express = require('express');
+const logger = require('./config/winston.js');
+const cors = require('cors');
+const dotenv = require('dotenv');
 
-import usersRouter from './routers/users.mjs';
-import groupsRouter from './routers/groups.mjs';
-import userGroupRouter from './routers/userGroup.mjs';
-import logService from './services/logService.mjs';
-import utilService from './services/utilsService.mjs';
-import middlewareService from './services/middlewareService.mjs';
+const usersRouter = require('./routers/users.js');
+const groupsRouter = require('./routers/groups.js');
+const userGroupRouter = require('./routers/userGroup.js');
+const logService = require('./services/logService.js');
+const utilService = require('./services/utilsService.js');
+const middlewareService = require('./services/middlewareService.js');
 
+dotenv.config();
 const port = process.env.port || '3000';
 const app = express();
 

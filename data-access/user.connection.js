@@ -1,10 +1,11 @@
-import Sequelize from 'sequelize';
-import pg from 'pg';
-import config from '../config/properties.config.mjs';
+const Sequelize = require('sequelize');
+const pg = require('pg');
+const dotenv = require('dotenv');
 
+dotenv.config();
 pg.defaults.ssl = true;
 
-const sequelize = new Sequelize(config.url);
+const sequelize = new Sequelize(process.env.DB_URL);
 
 sequelize
     .sync()
@@ -15,4 +16,4 @@ sequelize
         console.error('Unable to connect to the database:', err);
     });
 
-export default sequelize;
+module.exports = sequelize;
